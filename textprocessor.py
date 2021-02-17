@@ -33,7 +33,7 @@ class TextProcessor:
                                    'PSD', 'PDF', 'EPS', 'AI']
 
     def __repr__(self) -> str:
-        return f'< Processing: {len(self.container)} lines: {len(self.images)+len(self.videos)+len(self.links)+len(self.outcast)} scrapped >'
+        return f'< Processing: {len([*self.container])} lines: {len(self.images)+len(self.videos)+len(self.links)+len(self.outcasts)} scrapped >'
 
     def __enter__(self) -> type:
         self.file: TextIOWrapper = open(self.target, 'r', encoding="utf-8")
@@ -51,6 +51,7 @@ class TextProcessor:
     def _affirm(self) -> None:
         if not self.container:
             raise No_Lines_Rendered(self)
+        return True
 
     def _empty_db(self) -> bool:
         try:
@@ -60,8 +61,8 @@ class TextProcessor:
                 self.links = []
             if self.images:
                 self.images = []
-            if self.outcast:
-                self.outcast = []
+            if self.outcasts:
+                self.outcasts = []
         except:
             return False
         else:
@@ -76,8 +77,10 @@ class TextProcessor:
         finally:
             container = (chain.from_iterable(line.split(notation)
                                              for line in self.file))
+            words = (chain.from_iterable(word.split(' ') for word in container))
         self.container: chain = container
-        return self
+        self.words: chain = words
+        return self.container
 
     def get_links(self, hint: str) -> list:
         self._affirm()
@@ -110,23 +113,24 @@ class TextProcessor:
         self.videos = links
         return self.videos
 
-    def get_outcast(self, hint: str) -> list:
+    def get_outcasts(self, hint: str) -> list:
         self._affirm()
         links: list = []
         for line in self.container:
-            if line.startswith(hint) and not line.endswith('.mp4') and not line.endswith('.jpg') and not line.endswith('.png') and line not in links:
+            status = False if True in [line.lower().endswith(f'.{type.lower()}') for type in self.video_types + self.image_types + ['com']] else True
+            if line.startswith(hint) and status and line not in links:
                 links.append(line)
         self.outcasts = links
         return self.outcasts
 
-    def fetch_kword_stat(self, kword: str) -> list:
+    def find_word(self, kword: str) -> list:
         self._affirm()
         position: int = 0
         if type(kword) == list:
             result: list = [{}, 0]
             for word in kword:
                 result[0][word] = []
-            for word in self.container:
+            for word in self.words:
                 for w in kword:
                     if word.lower() == w.lower():
                         result[1] += 1
@@ -135,7 +139,7 @@ class TextProcessor:
 
         elif type(kword) == str:
             result: list = [[], 0]
-            for word in self.container:
+            for word in self.words:
                 if word.lower() == kword:
                     result[1] += 1
                     result[0].append(position)
@@ -159,12 +163,11 @@ class TextProcessor:
                 json.dump(new_dict, f, indent=4)
             return True
 
-
 '''
 We can utilize a context manager to work better as
 such:
 
-with TextProcessor('top.txt') as f:
+with TextProcessor('example.txt') as f:
     f.render_lines()
     f.get_videos('https://youtube.com/')
     f.save('videos', 'testing.json')
@@ -173,7 +176,7 @@ with TextProcessor('top.txt') as f:
 Although it's still very possible to work without one as
 such:
 
-f = TextProcessor('top.txt')
+f = TextProcessor('example.txt')
 f.render_lines()
 f.get_videos('https://youtube.com/')
 f.save('videos', 'testing.json')
