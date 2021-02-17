@@ -68,7 +68,7 @@ class TextProcessor:
         else:
             return True
 
-    def render_lines(self, notation: str = '\n') -> type:
+    def render_lines(self, notation: str = '\n') -> chain:
         try:
             self.file
         except AttributeError:
@@ -167,17 +167,17 @@ class TextProcessor:
 We can utilize a context manager to work better as
 such:
 
-with TextProcessor('example.txt') as f:
-    f.render_lines()
-    f.get_videos('https://youtube.com/')
-    f.save('videos', 'testing.json')
+with TextProcessor('example.txt') as ctx:
+    ctx.render_lines()
+    ctx.get_videos('https://youtube.com/')
+    ctx.save('videos', 'testing.json')
 
 
 Although it's still very possible to work without one as
 such:
 
-f = TextProcessor('example.txt')
-f.render_lines()
-f.get_videos('https://youtube.com/')
-f.save('videos', 'testing.json')
+ctx = TextProcessor('example.txt')
+ctx.render_lines()
+ctx.get_videos('https://youtube.com/')
+ctx.save('videos', 'testing.json')
 '''
