@@ -23,13 +23,13 @@ with TextProcessor('yourtextfile.txt') as ctx:
 ### Methods
 Common Methods | Purpose
 ------------ | -------------
-[render_lines](#render_lines) | Reading the file
-[get_links](#get_links) | Filter out all links in the text file
-[get_images](#get_images) | Get all images in the text file
-[get_videos](#get_videos) | Get all videos in the text file
-[get_outcasts](#get_outcasts) | Get all alienated links
-[find_word](#find_words) |  To get statistics of key words
-[save](#save) | Save scrapped data into a json file
+[render_lines](#render_lines(notation)) | Reading the file
+[get_links](#get_links(hint)) | Filter out all links in the text file
+[get_images](#get_images(hint)) | Get all images in the text file
+[get_videos](#get_videos(hint)) | Get all videos in the text file
+[get_outcasts](#get_outcasts(hint)) | Get all alienated links
+[find_word](#find_words(*kword)) |  To get statistics of key words
+[save](#save(header,destination)) | Save scrapped data into a json file
 
 #### render_lines(notation)
 __Parameters__:
@@ -65,7 +65,7 @@ __Parameters__:
 ***kword** - An argument list or a string of key-word(s) that the algorithm searches for in the word.
 </br>
 
-#### save(header, destination)
+#### save(header,destination)
 __Parameters__:
 <br>
 **header** - The main key that all the scrapped data sets will be under.
