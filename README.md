@@ -38,13 +38,13 @@ ctx.render_lines()
 
 | Common Methods                            | Purpose                               |
 | ----------------------------------------- | ------------------------------------- |
-| [render_lines](#render_lines(notation)) | Reading the file                      |
-| [get_links](#get_links(hint))           | Filter out all links in the text file |
-| [get_images](#get_images(hint))         | Get all images in the text file       |
-| [get_videos](#get_videos(hint))         | Get all videos in the text file       |
-| [get_outcasts](#get_outcasts(hint))     | Get all alienated links               |
-| [find_word](#find_words(*kword))        | To get statistics of key words        |
-| [save](#save(header,destination))       | Save scrapped data into a json file   |
+| [render_lines](#render_linesnotation) | Reading the file                      |
+| [get_links](#get_linkshint)           | Filter out all links in the text file |
+| [get_images](#get_imageshint)         | Get all images in the text file       |
+| [get_videos](#get_videoshint)         | Get all videos in the text file       |
+| [get_outcasts](#get_outcastshint)     | Get all alienated links               |
+| [find_word](#find_words*kword)        | To get statistics of key words        |
+| [save](#saveheader,destination)       | Save scrapped data into a json file   |
 
 ### class TextProcessor
     
