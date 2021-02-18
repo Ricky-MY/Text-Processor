@@ -4,7 +4,7 @@
 
 1. [General Info](#general-info)
 2. [Documentation](#documentation)
-3. [Installation](#how-can-i-run-this-project)
+3. [Installation](#Installation)
 
 ### General Info
 
@@ -38,17 +38,17 @@ ctx.render_lines()
 
 | Common Methods                            | Purpose                               |
 | ----------------------------------------- | ------------------------------------- |
-| [render_lines](<#render_lines(notation)>) | Reading the file                      |
-| [get_links](<#get_links(hint)>)           | Filter out all links in the text file |
-| [get_images](<#get_images(hint)>)         | Get all images in the text file       |
-| [get_videos](<#get_videos(hint)>)         | Get all videos in the text file       |
-| [get_outcasts](<#get_outcasts(hint)>)     | Get all alienated links               |
-| [find_word](<#find_words(*kword)>)        | To get statistics of key words        |
-| [save](<#save(header,destination)>)       | Save scrapped data into a json file   |
+| [render_lines](#render_lines(notation)) | Reading the file                      |
+| [get_links](#get_links(hint))           | Filter out all links in the text file |
+| [get_images](#get_images(hint))         | Get all images in the text file       |
+| [get_videos](#get_videos(hint))         | Get all videos in the text file       |
+| [get_outcasts](#get_outcasts(hint))     | Get all alienated links               |
+| [find_word](#find_words(*kword))        | To get statistics of key words        |
+| [save](#save(header,destination))       | Save scrapped data into a json file   |
 
 ### class TextProcessor
-
-<hr width="100%" size="1" align="center">
+    
+<hr WIDTH="100%" SIZE="1" align="center" noshade>
 <span>
 
 #### render_lines(notation)
@@ -139,7 +139,7 @@ with TextProcessor('yourtextfile.txt') as ctx:
 
 ...
 
-### How to install.
+### Installation
 
 Use pip to install:
 
